@@ -63,3 +63,11 @@ class Util:
     @property
     def object_count(self):
         return self._object_count
+
+    @property
+    def constraints(self):
+        return self._constraints
+
+    @property
+    def knapsack_count(self):
+        return self._knapsack_count
