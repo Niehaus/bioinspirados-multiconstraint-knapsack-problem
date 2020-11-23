@@ -73,10 +73,10 @@ class AntSystem:
             else:
                 ant_contribution = 0
 
-        for i in range(0, self.knapsack_count):
-            for j in range(0, len(ant.trail) - 1):
-                if ant.trail[j] == 1:  # Se o objeto está na mochila atualiza matriz
-                    self.pheromone_matrix[i][j] += ant_contribution
+            for i in range(0, self.knapsack_count):
+                for j in range(0, len(ant.trail) - 1):
+                    if ant.trail[j] == 1:  # Se o objeto está na mochila atualiza matriz
+                        self.pheromone_matrix[i][j] += ant_contribution
 
     def update_best_solution(self, candidate_solution):
         candidate_fo = self.util.calculate_fo(candidate_solution)
@@ -105,10 +105,10 @@ class Ant:
         self.trail[0] = initial_object
 
     @staticmethod
-    def generate_ant_pop(object_count):
+    def generate_ant_pop(object_count, npop):
         """ Initial position of ant set randomly """
         ant_pop = []
-        for _ in range(object_count):
+        for _ in range(npop):
             ant_pop.append(Ant(object_count))
         return ant_pop
 
