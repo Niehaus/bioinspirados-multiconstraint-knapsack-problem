@@ -26,7 +26,7 @@ class AntSystem:
         }
 
         for i in range(self.knapsack_count):
-            self.pheromone_matrix[i] = [10 ** -16] * self.object_count
+            self.pheromone_matrix[i] = [10 ** 16] * self.object_count
 
     def move(self, ant):
         trail_size = 0
@@ -42,11 +42,15 @@ class AntSystem:
 
             lucky_number = random.uniform(0, total_probability)
             selected_city = 0
+            # print(total_probability)
             for backpack in range(0, self.knapsack_count):
                 for i in range(0, self.object_count):
                     selected_city += self.obj_probability[i]
                     if selected_city >= lucky_number and self.constraints[backpack][i] != 0:
                         ant.make_visit(i)
+                        # print('move:', i)
+                        # print('prob:')
+                        # print(i, self.obj_probability[i])
                         trail_size += 1
                         break
 
@@ -93,7 +97,7 @@ class AntSystem:
 
     def clear_pheromone_matrix(self):
         for i in range(0, self.object_count):
-            self.pheromone_matrix[i] = [10 ** -16] * self.object_count
+            self.pheromone_matrix[i] = [10 ** 16] * self.object_count
 
 
 class Ant:
