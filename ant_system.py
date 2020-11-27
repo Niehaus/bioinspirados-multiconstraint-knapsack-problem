@@ -16,7 +16,7 @@ class AntSystem:
         self.knapsack_count = self.util.knapsack_count
         self.pheromone_matrix = {}
         self.evaporation_rate = evaporation_rate
-        self.obj_probability = [0] * self.object_count
+        self.obj_probability = {}
         self.Q = q
         self.alpha = alpha
         self.beta = beta
@@ -27,6 +27,8 @@ class AntSystem:
 
         for i in range(self.knapsack_count):
             self.pheromone_matrix[i] = [10 ** 16] * self.object_count
+            self.obj_probability[i] = [0] * self.object_count
+        #print('matriz de feromonios', self.pheromone_matrix)
 
     def move(self, ant):
         while len(ant.obj_index) < self.object_count:
@@ -34,33 +36,41 @@ class AntSystem:
             self.probability_of_move(ant)
 
             total_probability = 0
-            for i in range(0, self.object_count):
-                total_probability += self.obj_probability[i]
-
-            lucky_number = random.uniform(0, total_probability)
-            selected_city = 0
             for knapsack in range(0, self.knapsack_count):
-                for i in range(0, self.object_count):
-                    selected_city += self.obj_probability[i]
-                    if selected_city >= lucky_number and self.constraints[knapsack][i] != 0:
-                        ant.make_visit(i)
+                for j in range(0, self.object_count):
+                    total_probability += self.obj_probability[knapsack][j]
+            lucky_number = random.uniform(0, total_probability)
+            selected_obj = 0
+            for knapsack in range(0, self.knapsack_count):
+                for j in range(0, self.object_count):
+                    selected_obj += self.obj_probability[knapsack][j]
+                    if selected_obj >= lucky_number and not ant.ant_has_visited(j):
+                        ant.make_visit(j)
                         break
+        print(ant.obj_index)
 
-    def probability_of_move(self, ant):
+    def probability_of_move(self, ant): # profit / peso
+    
         pheromone = 0
+    
         for i in range(0, self.knapsack_count):
             for j in range(0, self.object_count):
                 if not ant.ant_has_visited(j) and self.constraints[i][j] != 0:
-                    pheromone += pow(self.pheromone_matrix[i][j], self.alpha) * pow(1 / self.constraints[i][j],
-                                                                                    self.beta)
+                    pheromone += pow(self.pheromone_matrix[i][j], self.alpha) * pow(1 / self.constraints[i][j],  self.beta)                                                                                        
+        
         for i in range(0, self.knapsack_count):
+
+            # for j in range(0, self.object_count):
+            #     if not ant.ant_has_visited(j) and self.constraints[i][j] != 0:
+            #         pheromone += pow(self.pheromone_matrix[i][j], self.alpha) * pow(self.util.profit[i] / self.constraints[i][j],  self.beta)    
+        
             for j in range(0, self.object_count):
                 if self.constraints[i][j] != 0:
                     if ant.ant_has_visited(j):
-                        self.obj_probability[j] = 0
+                        self.obj_probability[i][j] = 0
                     else:
                         n = pow(self.pheromone_matrix[i][j], self.alpha) * pow(1 / self.constraints[i][j], self.beta)
-                        self.obj_probability[j] = n / pheromone
+                        self.obj_probability[i][j] = n / pheromone
 
     def update_pheromone(self, ant_pop):
         for i in range(0, self.knapsack_count):
@@ -97,12 +107,13 @@ class Ant:
         self.trail = [0] * _object_count
         self.obj_index = []
         self.object_count = _object_count
+        self.last_index = 0 #index de até onde n violou a restrição
 
     def ant_initial_position(self):
-        initial_object = random.randint(0, 1)
-        if initial_object == 1:
-            self.obj_index.append(0)
-        self.trail[0] = initial_object
+        initial_object = random.randint(0, self.object_count - 1)
+        self.obj_index.append(initial_object)
+        self.trail[initial_object] = 1
+       
 
     @staticmethod
     def generate_ant_pop(object_count, npop):

@@ -28,7 +28,9 @@ class Util:
     def show_entries(self):
         print(f'Capacidade das Mochilas: {self._capacity} \n'
               f'Quantidade de Mochilas: {self._knapsack_count} \n'
-              f'Ótimo: {self.known_optimum}')
+              f'Ótimo: {self.known_optimum}\n'
+            #   f'Constraints: {self._constraints}'
+              )
 
     @staticmethod
     def bigger(a, b):
@@ -71,3 +73,7 @@ class Util:
     @property
     def knapsack_count(self):
         return self._knapsack_count
+
+    @property
+    def profit(self):
+        return self._profit
