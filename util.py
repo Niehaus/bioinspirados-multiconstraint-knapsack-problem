@@ -1,3 +1,16 @@
+"""
+**** Ant System ****
+authors: Barbara Boechat, Juliana Araujo, Tiago Trotta
+date: 20/11/2020
+
+
+* Neste aquivo os arquivos são lidos e separados em variaveis
+* para serem utilizadas no Ant System e as FOs são calculadas
+* a partir das funções presentes aqui.
+
+"""
+
+
 class Util:
     def __init__(self, filepath):
         self._object_count = 0
@@ -29,7 +42,7 @@ class Util:
         print(f'Capacidade das Mochilas: {self._capacity} \n'
               f'Quantidade de Mochilas: {self._knapsack_count} \n'
               f'Ótimo: {self.known_optimum}\n'
-            #   f'Constraints: {self._constraints}'
+              #   f'Constraints: {self._constraints}'
               )
 
     @staticmethod
@@ -40,6 +53,11 @@ class Util:
             return b
 
     def _weight(self, x, i):
+        """
+        :param x: vetor de objetos que estão na mochila
+        :param i: constraint análisado
+        :return: peso total da mochila
+        """
         total_weight = 0
 
         for j in range(len(x)):
@@ -49,6 +67,10 @@ class Util:
         return total_weight
 
     def calculate_fo(self, x):
+        """
+        :param x: vetor de objetos que estão na mochila
+        :return: valor do profit da mochila
+        """
         function = 0
 
         for i in range(len(x)):

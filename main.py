@@ -1,17 +1,24 @@
+"""
+**** Ant System ****
+authors: Barbara Boechat, Juliana Araujo, Tiago Trotta
+date: 20/11/2020
+
+"""
+
 from ant_system import AntSystem, Ant
 from util import Util
 
 if __name__ == '__main__':
-    util = Util('instances/PB4.txt')
+    util = Util('instances/PB1.txt')
     util.show_entries()
 
     evaporation_rate = 0.05
     Q = 0.001
-    iter_max = 10
-    ant_system = AntSystem(util, evaporation_rate, Q, 1, 0.01)
+    iter_max = 100
+    ant_system = AntSystem(util, evaporation_rate, Q, 1, 0.5)
 
     iteration = 0
-    n_ant = 4
+    n_ant = 100
     ant_pop = Ant.generate_ant_pop(util.object_count, n_ant)
     while iteration < iter_max:
         for ant in ant_pop:
