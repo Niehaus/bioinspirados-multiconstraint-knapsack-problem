@@ -12,7 +12,7 @@
 
 ## Execução
 
-    ~$ python main.py [Arquivo de instância]
+    ~$ python main.py [Arquivo de instância] [Arquivo de saída] [Número de formigas] [Máximo de iterações] [Alfa] [Beta]
 
 ## Formato do arquivo de instância
 

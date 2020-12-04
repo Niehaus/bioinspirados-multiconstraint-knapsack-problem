@@ -20,3 +20,8 @@ def write_to_file(args, file_out, optimum):
 	f = open(file_out, 'a')
 	f.write("\t".join(args) + "\t" + optimum + "\n")
 	f.close()
+
+def write_statistics_to_file(file_out, iteration, optimum, mean, std_deviation):
+	log = open(file_out, "a")
+	log.write("\t".join([str(iteration), str(optimum), str(mean), str(std_deviation)]) + "\n")
+	log.close()

@@ -7,10 +7,10 @@
 file_obj  = open("arguments.txt", "w+")
   
 # initiaizing lists 
-ants = [10, 25, 50, 75, 100] 
-iterations = [50, 75, 85, 95, 100] 
-alpha = [1, 0.5, 1, 1, 1.25]
-beta = [51, 1,0.5, 1.25, 1.0]
+ants = [50, 85, 100] 
+iterations = [50, 85, 100] 
+alpha = [0.5, 1, 1.25]
+beta = [0.5, 1, 1.25]
 
 # printing lists  
 print ("A lista de parametros são: " + str(ants) +
