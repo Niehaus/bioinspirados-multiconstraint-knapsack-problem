@@ -40,5 +40,5 @@ if __name__ == '__main__':
     ant_system.clear_pheromone_matrix()
     optimum, solution = ant_system.get_best_solution()
 
-    #print(f"\nNúmero de Objetos: {util.object_count} \nSolução: {optimum} -> {solution}")
+    print(f"\nNúmero de Objetos: {util.object_count} \nSolução: {optimum} -> {solution}")
     io_op.write_to_file([str(n_ant), str(iter_max), str(alfa), str(beta)], file_out, str(optimum))
