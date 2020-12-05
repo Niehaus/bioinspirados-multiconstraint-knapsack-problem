@@ -1,0 +1,2 @@
+Geração	Ótimo	Média dos Fitnesses	Desvio Padrão
+100	545	230.3406	70.92437515861525

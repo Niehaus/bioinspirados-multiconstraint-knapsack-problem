@@ -1,0 +1,2 @@
+Geração	Ótimo	Média dos Fitnesses	Desvio Padrão
+85	1971	1109.0449411764705	222.47535615869393
